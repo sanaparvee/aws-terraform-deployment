@@ -1,5 +1,9 @@
 terraform {
-    backend "s3" {}
+    backend "s3" {
+    bucket = "bro-test-bucket"
+    key    = "s3://bro-test-bucket/statefile/"
+    region = "us-east-1"
+    }
 }
 
 terraform {
