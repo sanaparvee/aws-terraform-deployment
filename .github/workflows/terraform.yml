@@ -7,6 +7,10 @@ on:
     branches:
     - main
   workflow_dispatch:
+
+env:
+    AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
+    AWS_BUCKET_KEY_NAME: ${{ secrets.AWS_BUCKET_KEY_NAME }}
   
 jobs:
   deploy_in_useast1:
@@ -20,7 +24,7 @@ jobs:
         uses: hashicorp/setup-terraform@v1
 
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -backend-config="bucket=${AWS_BUCKET_NAME}" -backend-config="key=${AWS_BUCKET_KEY_NAME}" -backend-config="region=${AWS_REGION}"
 
       - name: Terraform Apply
         run: terraform apply -var-file=useast1.tfvars
