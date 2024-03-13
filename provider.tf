@@ -1,4 +1,5 @@
 terraform {
+    required_version = "~>1.6"
     backend "s3" {
     bucket = "bro-test-bucket"
     key    = "statefile"
@@ -10,6 +11,7 @@ terraform {
   required_providers {
     aws = {
       source = "hashicorp/aws"
+      required_version = "~>5.23"
     }
   }
 }
