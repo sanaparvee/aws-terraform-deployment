@@ -7,10 +7,6 @@ on:
     branches:
     - main
   workflow_dispatch:
-
-env:
-    AWS_BUCKET_NAME: ${{ secrets.AWS_BUCKET_NAME }}
-    AWS_BUCKET_KEY_NAME: ${{ secrets.AWS_BUCKET_KEY_NAME }}
   
 jobs:
   deploy_in_useast1:
@@ -19,7 +15,14 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-
+        
+      - name: Authorization to AWS Account
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
 
@@ -32,11 +35,18 @@ jobs:
   deploy_useast2:
     name: Deploy to us-east-2 Region
     runs-on: ubuntu-latest
+    
     needs: deploy_in_useast1
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-
+      - name: Authorization to AWS Account
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+          
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
 
