@@ -25,7 +25,7 @@ jobs:
         run: terraform init
 
       - name: Terraform Apply
-        run: terraform apply -var-file=us.tfvars
+        run: terraform apply -var-file=useast1.tfvars
 
   deploy_useast2:
     name: Deploy to us-east-2 Region
@@ -44,4 +44,4 @@ jobs:
         run: terraform init
 
       - name: Terraform Apply
-        run: terraform apply -var-file=eu.tfvars
+        run: terraform apply -var-file=useast2.tfvars
