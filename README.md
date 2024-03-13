@@ -1,6 +1,7 @@
 # aws-terraform-deployment
 This repository is used for deploying AWS resources in different regions using terraform
-Note: For Other users who clone this repo:
+
+- Note: For Other users who clone this repo:
 
 The default branch has been renamed!
 prod is now named as main
