@@ -1,5 +1,5 @@
 locals {
-  region_prefix = var.prefix
+  prefix = ""
 }
 
 resource "aws_s3_bucket" "s3" {
