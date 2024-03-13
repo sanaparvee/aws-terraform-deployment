@@ -58,3 +58,16 @@ jobs:
 
       - name: Terraform Apply
         run: terraform apply -var-file=useast2.tfvars
+
+  approve_to_deploy:
+    name: Approval Step
+    runs-on: ubuntu-latest
+    needs:
+      - deploy_useast1
+      - deploy_useast2
+    if: always()
+    steps:
+      - name: Request Approval
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
